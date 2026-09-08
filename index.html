@@ -1,62 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MY MANAGER - Duka App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MY MANAGER</title>
 <link rel="manifest" href="./manifest.json">
 <link rel="stylesheet" href="./style.css">
-<meta name="theme-color" content="#ccff00">
 </head>
 <body>
 <header>
 <div class="logo">MY MANAGER</div>
-<span>MY MANAGER • OFFLINE DUKA OS</span>
+<span>OFFLINE DUKA OS</span>
 </header>
 
 <div class="container">
-<div class="bal" style="cursor:default">
-<small onclick="editBalance()" style="cursor:pointer;display:block">CURRENT BALANCE - TAP TO EDIT ✏️</small>
-<h1 id="balance" onclick="editBalance()" style="cursor:pointer">KSh 0</h1>
+<div class="bal">
+<small onclick="editBalance()">CURRENT BALANCE - TAP TO EDIT ✏️</small>
+<h1 id="balance" onclick="editBalance()">KSh 0</h1>
 <div class="row">
 <span class="chip" id="chipToday">KSh 0 today</span>
 <span class="chip" id="chipWeek">KSh 0 week</span>
 <span class="chip" id="chipItems">0 items</span>
 <span class="chip" id="chipReceipts">0 receipts</span>
 </div>
-<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
-<button onclick="event.stopPropagation(); exportBackup()" class="mini-btn" style="background:#00ff88">📥 EXPORT</button>
-<button onclick="event.stopPropagation(); document.getElementById('importFile').click()" class="mini-btn" style="background:#ccff00">📤 IMPORT</button>
-<button id="installBtn" onclick="event.stopPropagation(); installApp()" class="mini-btn" style="background:#fff">💻 INSTALL</button>
-<button onclick="event.stopPropagation(); setPassword()" class="mini-btn dark">🔒 PASS</button>
-<button onclick="event.stopPropagation(); openHelp()" class="mini-btn" style="background:#007bff;color:#fff">❓ HELP</button>
-<input type="file" id="importFile" style="display:none" accept=".json" onchange="importBackup(event)">
+<div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
+<button onclick="exportBackup()" class="mini-btn" style="background:#00ff88">📥 EXPORT</button>
+<button onclick="document.getElementById('importFile').click()" class="mini-btn" style="background:#ccff00">📤 IMPORT</button>
+<button id="installBtn" onclick="installApp()" class="mini-btn" style="background:#fff">💻 INSTALL</button>
+<button onclick="setPassword()" class="mini-btn dark">🔒 PASS</button>
+<button onclick="openHelp()" class="mini-btn" style="background:#007bff;color:#fff">❓ HELP</button>
+<input type="file" id="importFile" hidden accept=".json" onchange="importBackup(event)">
 </div>
 </div>
 
-<!-- your other sections - stock, sales, etc stay same -->
-<div id="appContent"></div>
+<div class="card">
+<h3>➕ Add Sale</h3>
+<input id="itemName" placeholder="Item name e.g Unga">
+<input id="itemAmount" type="number" placeholder="Amount e.g 200">
+<button class="btn" onclick="addSale()">ADD SALE</button>
+</div>
+
+<div class="card" id="salesList">
+<h3>📜 Today's Sales</h3>
+<p style="color:#666;margin-top:10px">No sales yet</p>
+</div>
 
 </div>
 
 <script src="./script.js"></script>
 <script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js')}
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js')
 let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display='inline-block';
-  installBtn.innerText = '⬇️ INSTALL APP';
-});
+window.addEventListener('beforeinstallprompt', e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBtn').innerText='⬇️ INSTALL APP'});
 function installApp(){
-  if(deferredPrompt){
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; });
-  } else {
-    alert('To install:\n1. Tap 3 dots ⋮ top right\n2. Tap Add to Home screen\n3. Tap Install');
-  }
+ if(deferredPrompt){deferredPrompt.prompt()}else{alert('Tap 3 dots ⋮ → Add to Home screen → Install')}
 }
 </script>
 </body>
