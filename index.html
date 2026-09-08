@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>MillenMoney Ultimate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MillenMoney ULTIMATE</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ccff00">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="header">
-<div><b style="font-size:20px">MillenMoney</b> <span class="badge">ULTIMATE</span><br><small style="color:#666">Best Version • Protected</small></div>
-<div style="text-align:right"><small id="today" style="color:#666"></small><br><small style="color:#00ff88">● Live Updates</small></div>
+<div><b style="font-size:20px">MillenMoney</b> <span class="badge">ULTIMATE</span><br><small style="color:#666">PC App Ready</small></div>
+<div style="text-align:right"><small id="today"></small><br><small style="color:#00ff88">● Live</small></div>
 </div>
 <div class="bal" onclick="editBalance()">
 <small>CURRENT BALANCE - TAP TO EDIT ✏️</small>
@@ -21,29 +23,34 @@
 <span class="chip" id="chipItems">0 items</span>
 <span class="chip" id="chipReceipts">0 receipts</span>
 </div>
+<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+<button onclick="exportBackup()" style="background:#00ff88;color:#000;border:none;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer">📥 EXPORT BACKUP</button>
+<button onclick="document.getElementById('importFile').click()" style="background:#ccff00;color:#000;border:none;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer">📤 IMPORT</button>
+<button onclick="installApp()" id="installBtn" style="background:#fff;color:#000;border:none;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer">💻 INSTALL</button>
+<input type="file" id="importFile" style="display:none" accept=".json" onchange="importBackup(event)">
 </div>
-<div class="update-bar"><span class="dot"></span><span id="updateText">Loading protected history...</span></div>
+</div>
+<div class="update-bar"><span class="dot"></span><span id="updateText">Loading...</span></div>
 <div class="stats">
 <div class="stat"><small>Total Spent</small><b id="statSpent" style="color:#ff5a5a">KSh 0</b></div>
 <div class="stat"><small>Total Income</small><b id="statIncome" style="color:#00ff88">KSh 0</b></div>
 <div class="stat"><small>Stock Value</small><b id="statStock" style="color:#ccff00">KSh 0</b></div>
 </div>
 <div class="cart">
-<h4>🧾 ADD ITEMS - TOTAL INCREASES LIVE</h4>
+<h4>🧾 ADD ITEMS</h4>
 <div class="inputs">
-<input id="iName" placeholder="Item name e.g. Screens">
+<input id="iName" placeholder="Item name">
 <input id="iPrice" type="number" placeholder="Price" class="q">
 <input id="iQty" type="number" value="1" class="q">
 </div>
-<button class="btn btn-add" onclick="addToCart()">+ Add Item (Sum Increases)</button>
-<div class="cart-list" id="cartList"></div>
-<div class="total-box"><span>Sum Total Live:</span><span id="liveTotal">KSh 0</span></div>
+<button class="btn btn-add" onclick="addToCart()">+ Add Item</button>
+<div id="cartList"></div>
+<div class="total-box"><span>Sum Total:</span><span id="liveTotal">KSh 0</span></div>
 <div style="display:flex;gap:6px;margin-top:10px">
-<select id="type"><option value="spent">Spent / Bought 🛒</option><option value="income">Money In / Sale 💰</option></select>
-<input id="note" placeholder="Note: Supplier / Client / M-Pesa">
+<select id="type"><option value="spent">Spent</option><option value="income">Income</option></select>
+<input id="note" placeholder="Note">
 </div>
-<button class="btn btn-save" onclick="saveReceipt()">💾 Save & Update Everything (Protected)</button>
-<div class="protected">🔒 This receipt locked forever. Cannot be deleted. Daily calculator auto-updates. Tap balance to change it.</div>
+<button class="btn btn-save" onclick="saveReceipt()">💾 Save Protected</button>
 </div>
 <div class="tabs">
 <div class="tab active" onclick="setTab('daily',this)">Daily</div>
@@ -52,7 +59,15 @@
 <div class="tab" onclick="setTab('updates',this)">Updates</div>
 </div>
 <div id="mainContent"></div>
-<div class="fab" onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})">+ Add New Items</div>
 <script src="script.js"></script>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});
+function installApp(){
+ if(deferredPrompt){deferredPrompt.prompt()}
+ else{alert('Chrome: 3 dots → Save and share → Create shortcut → tick Open as window → Create')}
+}
+</script>
 </body>
 </html>
