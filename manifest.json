@@ -1,19 +1,13 @@
 {
-  "name": "MY MANAGER - Duka Manager",
-  "short_name": "MY MANAGER",
-  "start_url": ".",
+  "name": "MillenMoney ULTIMATE",
+  "short_name": "MillenMoney",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#ccff00",
-  "orientation": "portrait",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/483/483434.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/483/483434.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/2331/2331947.png",
       "sizes": "512x512",
       "type": "image/png"
     }
