@@ -10,10 +10,21 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- LOCK SCREEN -->
+<div id="lockScreen" style="display:none;position:fixed;inset:0;background:#000;z-index:9999;flex-direction:column;align-items:center;justify-content:center;padding:20px">
+<h2>🔒 Private</h2>
+<p style="color:#888">Enter your password to open</p>
+<input id="passInput" type="password" placeholder="Password" style="padding:15px;width:250px;text-align:center;font-size:18px;border-radius:12px;margin:10px 0;background:#111;color:#fff;border:1px solid #333">
+<button onclick="unlockApp()" style="background:#ccff00;color:#000;border:none;padding:12px 30px;border-radius:20px;font-weight:800;cursor:pointer">UNLOCK</button>
+<small onclick="resetPass()" style="color:#555;margin-top:15px;cursor:pointer">Forgot password? Reset</small>
+</div>
+
 <div class="header">
 <div><b style="font-size:20px">MillenMoney</b> <span class="badge">ULTIMATE</span><br><small style="color:#666">PC App Ready</small></div>
 <div style="text-align:right"><small id="today"></small><br><small style="color:#00ff88">● Live</small></div>
 </div>
+
 <div class="bal" onclick="editBalance()">
 <small>CURRENT BALANCE - TAP TO EDIT ✏️</small>
 <h1 id="balance">KSh 0</h1>
@@ -24,18 +35,22 @@
 <span class="chip" id="chipReceipts">0 receipts</span>
 </div>
 <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
-<button onclick="exportBackup()" style="background:#00ff88;color:#000;border:none;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer">📥 EXPORT BACKUP</button>
+<button onclick="exportBackup()" style="background:#00ff88;color:#000;border:none;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer">📥 EXPORT</button>
 <button onclick="document.getElementById('importFile').click()" style="background:#ccff00;color:#000;border:none;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer">📤 IMPORT</button>
 <button onclick="installApp()" id="installBtn" style="background:#fff;color:#000;border:none;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer">💻 INSTALL</button>
+<button onclick="setPassword()" style="background:#111;color:#fff;border:1px solid #333;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer">🔒 PASS</button>
+<button onclick="openHelp()" style="background:#007bff;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer">❓ HELP</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="importBackup(event)">
 </div>
 </div>
+
 <div class="update-bar"><span class="dot"></span><span id="updateText">Loading...</span></div>
 <div class="stats">
 <div class="stat"><small>Total Spent</small><b id="statSpent" style="color:#ff5a5a">KSh 0</b></div>
 <div class="stat"><small>Total Income</small><b id="statIncome" style="color:#00ff88">KSh 0</b></div>
 <div class="stat"><small>Stock Value</small><b id="statStock" style="color:#ccff00">KSh 0</b></div>
 </div>
+
 <div class="cart">
 <h4>🧾 ADD ITEMS</h4>
 <div class="inputs">
@@ -52,13 +67,36 @@
 </div>
 <button class="btn btn-save" onclick="saveReceipt()">💾 Save Protected</button>
 </div>
+
 <div class="tabs">
 <div class="tab active" onclick="setTab('daily',this)">Daily</div>
 <div class="tab" onclick="setTab('receipts',this)">Receipts</div>
 <div class="tab" onclick="setTab('items',this)">Items</div>
 <div class="tab" onclick="setTab('updates',this)">Updates</div>
 </div>
+
 <div id="mainContent"></div>
+
+<!-- HELP MODAL -->
+<div id="helpModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9998;align-items:center;justify-content:center;padding:15px" onclick="if(event.target===this)closeHelp()">
+<div style="background:#111;border:1px solid #333;border-radius:15px;padding:20px;max-width:400px;width:100%;max-height:90vh;overflow-y:auto">
+<h3 style="margin-top:0">📘 How MillenMoney Works</h3>
+<div style="font-size:13px;line-height:1.6;color:#ccc">
+<b>1. Balance:</b> Tap yellow card to set your starting money.<br><br>
+<b>2. Add Sale:</b> Type item name, price, qty → Click + Add Item → Add more items if customer bought many.<br><br>
+<b>3. Save:</b> Choose Spent/Income, write note (e.g. "Customer John") → Save. It adds to history & updates balance.<br><br>
+<b>4. Daily Tab:</b> See today's sales grouped by day.<br>
+<b>5. Receipts Tab:</b> Full receipts with time.<br>
+<b>6. Items Tab:</b> Every single item sold.<br><br>
+<b>🔒 Privacy:</b> Click 🔒 PASS to set your own password. Only you can open app on your device.<br><br>
+<b>📥 EXPORT / 📤 IMPORT:</b> EXPORT saves backup to Downloads. IMPORT brings it back if you change phone/PC. Do EXPORT every week!<br><br>
+<b>💻 INSTALL:</b> Click to install as PC/Mobile app. After 1st online open, it works WITHOUT internet.<br><br>
+<b>⚠️ Data:</b> Data is saved ONLY on your device. We cannot see it. If you delete app without EXPORT, data is lost.<br>
+</div>
+<button onclick="closeHelp()" style="background:#ccff00;color:#000;border:none;padding:10px;width:100%;border-radius:10px;font-weight:800;margin-top:15px;cursor:pointer">Got it!</button>
+</div>
+</div>
+
 <script src="script.js"></script>
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
