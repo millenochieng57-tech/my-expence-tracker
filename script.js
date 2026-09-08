@@ -13,3 +13,5 @@ function renderAll(){document.getElementById('balance').innerText='KSh '+balance
 function setTab(t,el){tab=t;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderAll();}
 if(receipts.length===0&&balance===0){setTimeout(()=>{let b=prompt('Enter your current balance:');if(b){balance=Number(b);localStorage.setItem('millen_bal_ultimate',balance);renderAll();}},500);}
 renderCart();renderAll();
+function openHelp(){document.getElementById('helpModal').style.display='flex';}
+function closeHelp(){document.getElementById('helpModal').style.display='none';}
