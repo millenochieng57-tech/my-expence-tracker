@@ -1,6 +1,6 @@
 // PAYWALL + PASSWORD SYSTEM
-let savedPass = localStorage.getItem('millen_pass');
-let hasPaid = localStorage.getItem('millen_paid') === 'yes';
+let savedPass = localStorage.getItem('_pass');
+let hasPaid = localStorage.getItem('MANAGER_paid') === 'yes';
 function checkPay(){
  const el=document.getElementById('payWall');
  if(!el) return;
@@ -10,8 +10,8 @@ function checkPay(){
 function unlockAfterPay(){
  let code = document.getElementById('mpesaCode').value.trim();
  if(code.length < 4) return alert('Enter valid M-Pesa code e.g. THJ...');
- localStorage.setItem('millen_paid','yes');
- localStorage.setItem('millen_mpesa',code);
+ localStorage.setItem('MANAGER_paid','yes');
+ localStorage.setItem('MANAGER_mpesa',code);
  document.getElementById('payWall').style.display='none';
  hasPaid=true;
  alert('Asante! App unlocked 🔓 Karibu!');
@@ -24,25 +24,25 @@ function checkLock(){
 }
 function unlockApp(){
  let p=document.getElementById('passInput').value;
- if(p===localStorage.getItem('millen_pass')){
+ if(p===localStorage.getItem('MANAGER_pass')){
   document.getElementById('lockScreen').style.display='none';
   document.body.style.overflow='auto';
  }else{ alert('Wrong password!'); }
 }
 function setPassword(){
- let curr=localStorage.getItem('millen_pass');
+ let curr=localStorage.getItem('MANAGER_pass');
  if(curr){
   let oldP=prompt('Enter current password:');
   if(oldP!==curr) return alert('Wrong current password');
  }
  let np=prompt('Set new password (leave empty to remove):');
  if(np===null) return;
- if(np===''){localStorage.removeItem('millen_pass'); alert('Password removed'); savedPass=null; checkLock(); return;}
- localStorage.setItem('millen_pass',np); savedPass=np; alert('Password set! 🔒'); checkLock();
+ if(np===''){localStorage.removeItem('MANAGER_pass'); alert('Password removed'); savedPass=null; checkLock(); return;}
+ localStorage.setItem('MANAGER_pass',np); savedPass=np; alert('Password set! 🔒'); checkLock();
 }
 function resetPass(){
  if(confirm('Reset password?')){
-  localStorage.removeItem('millen_pass'); savedPass=null; document.getElementById('lockScreen').style.display='none'; document.body.style.overflow='auto';
+  localStorage.removeItem('MANAGER_pass'); savedPass=null; document.getElementById('lockScreen').style.display='none'; document.body.style.overflow='auto';
  }
 }
 function openHelp(){document.getElementById('helpModal').style.display='flex';}
@@ -50,17 +50,17 @@ function closeHelp(){document.getElementById('helpModal').style.display='none';}
 setTimeout(()=>{checkPay(); checkLock();},400);
 
 // MAIN APP DATA
-let balance = parseFloat(localStorage.getItem('millen_balance')||'0');
-let receipts = JSON.parse(localStorage.getItem('millen_receipts')||'[]');
+let balance = parseFloat(localStorage.getItem('MANAGER_balance')||'0');
+let receipts = JSON.parse(localStorage.getItem('MANAGER_receipts')||'[]');
 let cart = [];
 let currentTab='daily';
 
 document.getElementById('today').innerText = new Date().toDateString();
 
 function saveAll(){
- localStorage.setItem('millen_balance', balance.toString());
- localStorage.setItem('millen_receipts', JSON.stringify(receipts));
- localStorage.setItem('millen_paid','yes'); // auto mark paid once they use app
+ localStorage.setItem('MANAGER_balance', balance.toString());
+ localStorage.setItem('MANAGER_receipts', JSON.stringify(receipts));
+ localStorage.setItem('MANAGER_paid','yes'); // auto mark paid once they use app
  hasPaid=true;
  updateUI();
 }
@@ -193,7 +193,7 @@ function exportBackup(){
  let data={balance, receipts, date:new Date().toISOString()};
  let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
  let url=URL.createObjectURL(blob);
- let a=document.createElement('a'); a.href=url; a.download='millen_backup_'+Date.now()+'.json'; a.click();
+ let a=document.createElement('a'); a.href=url; a.download='MANAGER_backup_'+Date.now()+'.json'; a.click();
 }
 
 function importBackup(e){
