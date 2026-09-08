@@ -20,6 +20,25 @@
 <small onclick="resetPass()" style="color:#555;margin-top:15px;cursor:pointer">Forgot password? Reset</small>
 </div>
 
+<!-- PAYWALL 3 BOB -->
+<div id="payWall" style="display:none;position:fixed;inset:0;background:#000;z-index:9997;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center">
+<h2 style="color:#ccff00">🔓 Unlock — KSh 3</h2>
+<p style="color:#888;max-width:320px">One-time payment to use MillenMoney ULTIMATE. Supports developer.</p>
+<div style="background:#111;border:1px solid #333;border-radius:12px;padding:15px;width:100%;max-width:320px;margin:15px 0">
+<b style="color:#fff">LIPA NA M-PESA:</b><br>
+<small style="color:#ccc;line-height:1.6">
+1. M-Pesa → Send Money<br>
+2. Phone: <b style="color:#ccff00;font-size:20px">0707714020</b><br>
+3. Amount: <b style="color:#fff">3</b><br>
+4. Copy M-Pesa SMS code<br><br>
+<span style="color:#00ff88">After payment, paste code below</span>
+</small>
+</div>
+<input id="mpesaCode" placeholder="Paste M-Pesa code e.g. THJ..." style="padding:12px;width:260px;border-radius:10px;border:1px solid #333;background:#111;color:#fff;text-align:center">
+<button onclick="unlockAfterPay()" style="background:#ccff00;color:#000;border:none;padding:12px 30px;border-radius:20px;font-weight:800;margin-top:10px;cursor:pointer">I HAVE PAID — UNLOCK APP</button>
+<small style="color:#555;margin-top:12px">You pay once per device. Keep your M-Pesa message.</small>
+</div>
+
 <div class="header">
 <div><b style="font-size:20px">MillenMoney</b> <span class="badge">ULTIMATE</span><br><small style="color:#666">PC App Ready</small></div>
 <div style="text-align:right"><small id="today"></small><br><small style="color:#00ff88">● Live</small></div>
@@ -83,15 +102,13 @@
 <h3 style="margin-top:0">📘 How MillenMoney Works</h3>
 <div style="font-size:13px;line-height:1.6;color:#ccc">
 <b>1. Balance:</b> Tap yellow card to set your starting money.<br><br>
-<b>2. Add Sale:</b> Type item name, price, qty → Click + Add Item → Add more items if customer bought many.<br><br>
-<b>3. Save:</b> Choose Spent/Income, write note (e.g. "Customer John") → Save. It adds to history & updates balance.<br><br>
-<b>4. Daily Tab:</b> See today's sales grouped by day.<br>
-<b>5. Receipts Tab:</b> Full receipts with time.<br>
-<b>6. Items Tab:</b> Every single item sold.<br><br>
-<b>🔒 Privacy:</b> Click 🔒 PASS to set your own password. Only you can open app on your device.<br><br>
-<b>📥 EXPORT / 📤 IMPORT:</b> EXPORT saves backup to Downloads. IMPORT brings it back if you change phone/PC. Do EXPORT every week!<br><br>
-<b>💻 INSTALL:</b> Click to install as PC/Mobile app. After 1st online open, it works WITHOUT internet.<br><br>
-<b>⚠️ Data:</b> Data is saved ONLY on your device. We cannot see it. If you delete app without EXPORT, data is lost.<br>
+<b>2. Add Sale:</b> Type item, price, qty → + Add Item → Add more if many items.<br><br>
+<b>3. Save:</b> Choose Spent/Income, note (e.g. "John") → Save.<br><br>
+<b>4. Tabs:</b> Daily = today group, Receipts = full history, Items = all items.<br><br>
+<b>🔒 PASS:</b> Set your own password, private per device.<br><br>
+<b>📥 EXPORT / 📤 IMPORT:</b> EXPORT saves backup. IMPORT restores if you change phone.<br><br>
+<b>💻 INSTALL:</b> Install as PC/Mobile app, works offline after first open.<br><br>
+<b>⚠️ Data:</b> Data stays ONLY on your device. We cannot see it. Always EXPORT weekly!<br>
 </div>
 <button onclick="closeHelp()" style="background:#ccff00;color:#000;border:none;padding:10px;width:100%;border-radius:10px;font-weight:800;margin-top:15px;cursor:pointer">Got it!</button>
 </div>
