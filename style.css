@@ -1,28 +1,16 @@
-*{box-sizing:border-box;font-family:'Manrope',sans-serif}
-body{margin:0;background:#000;color:#fff;max-width:480px;margin:auto;padding-bottom:30px}
-.header{display:flex;justify-content:space-between;padding:15px;background:#0a0a0a;border-bottom:1px solid #222}
-.badge{background:#ccff00;color:#000;font-size:10px;padding:2px 6px;border-radius:10px;font-weight:800}
-.bal{background:linear-gradient(135deg,#ccff00,#aaff00);color:#000;padding:15px;margin:10px;border-radius:15px;cursor:pointer}
-.bal h1{margin:5px 0;font-size:28px;font-weight:800}
-.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.chip{background:#000;color:#ccff00;font-size:11px;padding:4px 10px;border-radius:20px;font-weight:700}
-.mini-btn{color:#000;border:none;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;cursor:pointer}
-.mini-btn.dark{background:#111;color:#fff;border:1px solid #333}
-.update-bar{background:#111;margin:10px;padding:8px 12px;border-radius:20px;font-size:11px;display:flex;align-items:center;gap:6px;color:#888}
-.dot{width:8px;height:8px;background:#00ff88;border-radius:50%;display:inline-block;animation:blink 1s infinite}
-@keyframes blink{50%{opacity:0.3}}
-.stats{display:flex;gap:8px;padding:0 10px}
-.stat{flex:1;background:#111;border-radius:12px;padding:10px;text-align:center}
-.stat small{color:#666;font-size:11px;display:block}
-.cart{background:#0f0f0f;margin:10px;padding:12px;border-radius:15px;border:1px solid #222}
-.inputs{display:flex;gap:6px;margin-bottom:8px}
-.inputs input{flex:1;padding:10px;border-radius:10px;border:1px solid #333;background:#111;color:#fff}
-.inputs .q{max-width:80px}
-.btn{width:100%;padding:12px;border:none;border-radius:12px;font-weight:800;margin-top:6px;cursor:pointer}
-.btn-add{background:#222;color:#fff}
-.btn-save{background:#ccff00;color:#000}
-.total-box{display:flex;justify-content:space-between;font-weight:800;padding:8px 0;border-top:1px solid #222;margin-top:8px}
-.tabs{display:flex;gap:6px;padding:10px;overflow:auto}
-.tab{padding:8px 16px;background:#111;border-radius:20px;font-size:13px;cursor:pointer;white-space:nowrap;border:1px solid #222}
-.tab.active{background:#ccff00;color:#000;font-weight:800}
-select,input#note{flex:1;padding:10px;border-radius:10px;border:1px solid #333;background:#111;color:#fff}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#0a0a0a;color:#fff;min-height:100vh}
+header{padding:16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222}
+.logo{font-weight:900;letter-spacing:1px;background:#ccff00;color:#000;padding:6px 12px;border-radius:8px;font-size:18px}
+header span{font-size:11px;color:#888}
+.container{padding:16px;max-width:500px;margin:0 auto}
+.bal{background:#ccff00;color:#000;border-radius:20px;padding:18px;margin-bottom:16px}
+.bal small{font-weight:700;font-size:11px;opacity:.7}
+.bal h1{font-size:42px;font-weight:900;margin:6px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.chip{background:#000;color:#ccff00;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:700}
+.mini-btn{border:none;padding:8px 12px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer}
+.mini-btn.dark{background:#000;color:#fff}
+.card{background:#151515;border:1px solid #222;border-radius:16px;padding:14px;margin-top:12px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;background:#ccff00;color:#000;margin-top:10px;font-size:15px}
+input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #333;background:#0a0a0a;color:#fff;margin-top:8px}
