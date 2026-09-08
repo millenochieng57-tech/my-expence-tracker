@@ -1,1 +1,15 @@
-{"name":"MillenMoney Ultimate","short_name":"MillenMoney","start_url":".","display":"standalone","background_color":"#000000","theme_color":"#ccff00","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2331/2331940.png","sizes":"512x512","type":"image/png"}]}
+{
+  "name": "MillenMoney ULTIMATE",
+  "short_name": "MillenMoney",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ccff00",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2331/2331947.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
