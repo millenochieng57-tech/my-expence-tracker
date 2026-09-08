@@ -3,30 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MillenMoney ULTIMATE</title>
-<link rel="manifest" href="manifest.json">
+<title>MY MANAGER - Duka App</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="stylesheet" href="./style.css">
 <meta name="theme-color" content="#ccff00">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header>
+<div class="logo">MY MANAGER</div>
+<span>MY MANAGER • OFFLINE DUKA OS</span>
+</header>
 
-<div id="lockScreen" style="display:none;position:fixed;inset:0;background:#000;z-index:9999;flex-direction:column;align-items:center;justify-content:center;padding:20px">
-<h2>🔒 Private</h2>
-<p style="color:#888">Enter password</p>
-<input id="passInput" type="password" placeholder="Password" style="padding:15px;width:250px;text-align:center;font-size:18px;border-radius:12px;margin:10px 0;background:#111;color:#fff;border:1px solid #333">
-<button onclick="unlockApp()" style="background:#ccff00;color:#000;border:none;padding:12px 30px;border-radius:20px;font-weight:800">UNLOCK</button>
-<small onclick="resetPass()" style="color:#555;margin-top:15px">Forgot? Reset</small>
-</div>
-
-<div class="header">
-<div><b style="font-size:20px">MillenMoney</b> <span class="badge">ULTIMATE</span><br><small style="color:#666">Free Version</small></div>
-<div style="text-align:right"><small id="today"></small><br><small style="color:#00ff88">● Live</small></div>
-</div>
-
-<div class="bal" onclick="editBalance()">
-<small>CURRENT BALANCE - TAP TO EDIT ✏️</small>
-<h1 id="balance">KSh 0</h1>
+<div class="container">
+<div class="bal" style="cursor:default">
+<small onclick="editBalance()" style="cursor:pointer;display:block">CURRENT BALANCE - TAP TO EDIT ✏️</small>
+<h1 id="balance" onclick="editBalance()" style="cursor:pointer">KSh 0</h1>
 <div class="row">
 <span class="chip" id="chipToday">KSh 0 today</span>
 <span class="chip" id="chipWeek">KSh 0 week</span>
@@ -34,67 +25,39 @@
 <span class="chip" id="chipReceipts">0 receipts</span>
 </div>
 <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
-<button onclick="exportBackup()" class="mini-btn" style="background:#00ff88">📥 EXPORT</button>
-<button onclick="document.getElementById('importFile').click()" class="mini-btn" style="background:#ccff00">📤 IMPORT</button>
-<button onclick="installApp()" class="mini-btn" style="background:#fff">💻 INSTALL</button>
-<button onclick="setPassword()" class="mini-btn dark">🔒 PASS</button>
-<button onclick="openHelp()" class="mini-btn" style="background:#007bff;color:#fff">❓ HELP</button>
+<button onclick="event.stopPropagation(); exportBackup()" class="mini-btn" style="background:#00ff88">📥 EXPORT</button>
+<button onclick="event.stopPropagation(); document.getElementById('importFile').click()" class="mini-btn" style="background:#ccff00">📤 IMPORT</button>
+<button id="installBtn" onclick="event.stopPropagation(); installApp()" class="mini-btn" style="background:#fff">💻 INSTALL</button>
+<button onclick="event.stopPropagation(); setPassword()" class="mini-btn dark">🔒 PASS</button>
+<button onclick="event.stopPropagation(); openHelp()" class="mini-btn" style="background:#007bff;color:#fff">❓ HELP</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="importBackup(event)">
 </div>
 </div>
 
-<div class="update-bar"><span class="dot"></span><span id="updateText">Loading...</span></div>
-<div class="stats">
-<div class="stat"><small>Total Spent</small><b id="statSpent" style="color:#ff5a5a">KSh 0</b></div>
-<div class="stat"><small>Total Income</small><b id="statIncome" style="color:#00ff88">KSh 0</b></div>
-<div class="stat"><small>Balance</small><b id="statStock" style="color:#ccff00">KSh 0</b></div>
+<!-- your other sections - stock, sales, etc stay same -->
+<div id="appContent"></div>
+
 </div>
 
-<div class="cart">
-<h4>🧾 ADD ITEMS</h4>
-<div class="inputs">
-<input id="iName" placeholder="Item name">
-<input id="iPrice" type="number" placeholder="Price" class="q">
-<input id="iQty" type="number" value="1" class="q">
-</div>
-<button class="btn btn-add" onclick="addToCart()">+ Add Item</button>
-<div id="cartList"></div>
-<div class="total-box"><span>Sum Total:</span><span id="liveTotal">KSh 0</span></div>
-<div style="display:flex;gap:6px;margin-top:10px">
-<select id="type"><option value="spent">Spent</option><option value="income">Income</option></select>
-<input id="note" placeholder="Note e.g. Customer name">
-</div>
-<button class="btn btn-save" onclick="saveReceipt()">💾 Save Receipt</button>
-</div>
-
-<div class="tabs">
-<div class="tab active" onclick="setTab('daily',this)">Daily</div>
-<div class="tab" onclick="setTab('receipts',this)">Receipts</div>
-<div class="tab" onclick="setTab('items',this)">Items</div>
-<div class="tab" onclick="setTab('updates',this)">Updates</div>
-</div>
-<div id="mainContent"></div>
-
-<div id="helpModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9998;align-items:center;justify-content:center;padding:15px" onclick="if(event.target===this)closeHelp()">
-<div style="background:#111;border:1px solid #333;border-radius:15px;padding:20px;max-width:400px;width:100%">
-<h3 style="margin-top:0">📘 How It Works</h3>
-<div style="font-size:13px;line-height:1.6;color:#ccc">
-<b>1.</b> Tap yellow balance card to set starting money.<br>
-<b>2.</b> Add items → Save.<br>
-<b>3.</b> Check Daily/Receipts/Items.<br>
-<b>4.</b> EXPORT weekly for backup!<br>
-<b>5.</b> INSTALL to use offline.<br>
-</div>
-<button onclick="closeHelp()" style="background:#ccff00;color:#000;border:none;padding:10px;width:100%;border-radius:10px;font-weight:800;margin-top:15px">Got it!</button>
-</div>
-</div>
-
-<script src="script.js"></script>
+<script src="./script.js"></script>
 <script>
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js')}
 let deferredPrompt;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e; document.getElementById('installBtn').style.display='block'});
-function installApp(){ if(deferredPrompt){deferredPrompt.prompt()} else{alert('Chrome menu → Save and share → Install')} }
+const installBtn = document.getElementById('installBtn');
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display='inline-block';
+  installBtn.innerText = '⬇️ INSTALL APP';
+});
+function installApp(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; });
+  } else {
+    alert('To install:\n1. Tap 3 dots ⋮ top right\n2. Tap Add to Home screen\n3. Tap Install');
+  }
+}
 </script>
 </body>
 </html>
