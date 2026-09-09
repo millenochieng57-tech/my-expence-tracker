@@ -1,21 +1,25 @@
 {
-  "name": "SMART MANAGER - Duka Manager",
-  "short_name": "SMART MANAGER",
-  "start_url": "./?v=smart-manager-5",
+  "name": "SMART MANAGER - Duka Manager Pro",
+  "short_name": "Duka Manager",
+  "description": "Complete offline duka management - Sales, Stock, Debts & Reports",
+  "start_url": "./?v=pro-1.0",
   "display": "standalone",
-  "background_color": "#000000",
+  "background_color": "#0a0a0a",
   "theme_color": "#ccff00",
   "orientation": "portrait",
+  "scope": "./",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/483/483434.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/483/483434.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
